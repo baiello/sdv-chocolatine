@@ -14,4 +14,13 @@ class HomeControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         $this->assertSelectorTextContains('h1', 'Chocolatine');
     }
+
+    public function testSomethingElse(): void
+    {
+        $client = static::createClient();
+        $crawler = $client->request('GET', '/error');
+
+        $this->assertResponseIsSuccessful();
+        $this->assertSelectorTextContains('h1', 'Chocolatine');
+    }
 }
