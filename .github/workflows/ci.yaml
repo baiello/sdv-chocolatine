@@ -1,0 +1,15 @@
+name: Docker Image CI
+on:
+  push:
+    branches:
+      - main
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Build the Docker image
+        run: docker build . --file Dockerfile --tag chocolatine:$(date +%s) --tag
+          chocolatine:latest
+      - name: Execute tests
+        run: docker run -t chocolatine:latest php /app/bin/phpunit
