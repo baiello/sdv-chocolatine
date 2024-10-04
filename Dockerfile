@@ -12,10 +12,10 @@ RUN sed -ri -e 's!/var/www/!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/apache2.conf
 RUN echo "short_open_tag=Off" > /usr/local/etc/php/php.ini
 
 RUN apt update && \
-    apt install -y libicu-dev git zip && \
+    apt install -y libicu-dev libpq-dev git zip && \
     rm -rf /var/lib/apt/lists/* && \
     docker-php-ext-configure intl && \
-    docker-php-ext-install intl opcache
+    docker-php-ext-install intl opcache pdo pdo_pgsql
 
 COPY --from=composer /usr/bin/composer /usr/bin/composer
 
